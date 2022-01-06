@@ -155,6 +155,5 @@ def call_model(args, model, tokenizer, img=None):
         dec = decoder.generate(torch.LongTensor([args.bos_token])[:, None].to(device), args.max_seq_len,
                                eos_token=args.eos_token, context=encoded.detach(), temperature=args.get('temperature', .25))
         pred = post_process(token2str(dec, tokenizer)[0])
-    clipboard.copy(pred)
     return pred
 
