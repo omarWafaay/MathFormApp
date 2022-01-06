@@ -6,12 +6,31 @@ import Inference_Math_Detection as MD
 import Recog_MathForm as RM
 from PIL import Image
 import pdf2image
+import os
+
+def download_models():
+    mathdetector = './Models/MathDetector.ts'
+    mathrecog = './Models/MathRecog.pth'
+    
+    if not os.path.exists(mathdetector):
+        detector_url = 'gdown -O '+mathdetector+' https://drive.google.com/uc?id=1AGZTIRbx-KmLQ7bSEAcxUWWtdSrYucFz'
+        with st.spinner('done!\nmodel weights were not found, downloading them...'):
+            os.system(detector_url)
+    else:
+        print("Detector Model is here")
+
+    if not os.path.exists(mathrecog):
+        detector_url = 'gdown -O '+mathrecog+' https://drive.google.com/uc?id=1oR7eNBOC_3TBhFQ1KTzuWSl7-fet4cYh'
+        with st.spinner('done!\nmodel weights were not found, downloading them...'):
+            os.system(detector_url)
+    else:
+        print("Reconizer Model is here")
 
 def draw_rectangles (image, preds):
     for each_pred in preds:
         cv2.rectangle(image, (int(each_pred[0]),int(each_pred[1])), (int(each_pred[2]),int(each_pred[3])),(255,0,0),2)
 
-
+download_models()
 math_model = MD.initialize_model("./Models/MathDetector.ts")
 mathargs, *mathobjs = RM.initialize()
 
