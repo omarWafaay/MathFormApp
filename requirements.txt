@@ -14,3 +14,4 @@ torchvision==0.11.2
 #transformers==4.2.2
 #wandb==0.12.9
 #x_transformers==0.15.0
+opencv-python-headless
