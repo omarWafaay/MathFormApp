@@ -53,7 +53,7 @@ if inf_style == 'Image':
                 if st.button('clear uploaded_file'):
                     uploaded_file.seek(0)
                     st.write("attempt to clear uploaded_file")
-                state.sync()
+                
                 col1, col2, col3 = st.columns(3)
                 col1.header("Image")
                 col2.header("Latext")
