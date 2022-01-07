@@ -34,6 +34,10 @@ download_models()
 math_model = MD.initialize_model("./Models/MathDetector.ts")
 mathargs, *mathobjs = RM.initialize()
 
+if st.button('Clear uploaded file or image!'):
+    st.warning("attempt to clear uploaded_file")
+    uploaded_file.seek(0)
+
 inf_style = st.sidebar.selectbox("Inference Type",('Image', 'PDF'))
 if inf_style == 'Image':
 
@@ -50,9 +54,8 @@ if inf_style == 'Image':
                 images_rectangles = cv2.imdecode(file_bytes, 1)
                 draw_rectangles(images_rectangles,results_boxes)
                 st.image(images_rectangles)
-                if st.button('clear uploaded_file'):
-                    uploaded_file.seek(0)
-                    st.write("attempt to clear uploaded_file")
+
+                    
                 
                 col1, col2, col3 = st.columns(3)
                 col1.header("Image")
