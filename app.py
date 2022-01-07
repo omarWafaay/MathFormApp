@@ -49,6 +49,9 @@ if inf_style == 'Image':
                 images_rectangles = cv2.imdecode(file_bytes, 1)
                 draw_rectangles(images_rectangles,results_boxes)
                 st.image(images_rectangles)
+                if st.button('clear uploaded_file'):
+                    state.widget_key = str(randint(1000, 100000000))
+                state.sync()
                 col1, col2, col3 = st.columns(3)
                 col1.header("Image")
                 col2.header("Latext")
