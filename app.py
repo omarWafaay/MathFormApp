@@ -42,6 +42,9 @@ inf_style = st.sidebar.selectbox("Inference Type",('Image', 'PDF'))
 if inf_style == 'Image':
 
     uploaded_file = st.sidebar.file_uploader("Upload Image", type=['png','jpeg', 'jpg'])
+    if st.sidebar.button('Clear uploaded file or image!'):
+        st.write("attempt to clear uploaded_file")
+        uploaded_file.seek(0)
     res = st.sidebar.radio("Final Result",("Detection","Detection And Recogntion"))
     if uploaded_file is not None:
         with st.spinner(text='In progress'):
@@ -76,6 +79,9 @@ if inf_style == 'Image':
                             st.markdown("$$"+pred+"$$")
 elif inf_style == 'PDF':
     imagem_referencia = st.sidebar.file_uploader("Choose an image", type=["pdf"])
+    if st.sidebar.button('Clear uploaded file or image!'):
+        st.write("attempt to clear uploaded_file")
+        imagem_referencia.seek(0)    
     res = st.sidebar.radio("Final Result",("Detection","Detection And Recogntion"))
 
     if imagem_referencia is not None:
