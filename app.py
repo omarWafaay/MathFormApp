@@ -7,7 +7,7 @@ import Recog_MathForm as RM
 from PIL import Image
 import pdf2image
 import os
-from streamlit.session_state import get_session_state
+
 def download_models():
     mathdetector = './Models/MathDetector.ts'
     mathrecog = './Models/MathRecog.pth'
@@ -36,7 +36,7 @@ mathargs, *mathobjs = RM.initialize()
 
 inf_style = st.sidebar.selectbox("Inference Type",('Image', 'PDF'))
 if inf_style == 'Image':
-    state = get_session_state()
+    state = streamlit.session_state.get_session_state()
     if not state.widget_key:
         state.widget_key = str(randint(1000, 100000000))
     uploaded_file = st.sidebar.file_uploader("Upload Image", type=['png','jpeg', 'jpg'])
