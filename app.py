@@ -36,6 +36,9 @@ mathargs, *mathobjs = RM.initialize()
 
 inf_style = st.sidebar.selectbox("Inference Type",('Image', 'PDF'))
 if inf_style == 'Image':
+    state = get_session_state()
+    if not state.widget_key:
+        state.widget_key = str(randint(1000, 100000000))
     uploaded_file = st.sidebar.file_uploader("Upload Image", type=['png','jpeg', 'jpg'])
     res = st.sidebar.radio("Final Result",("Detection","Detection And Recogntion"))
     if uploaded_file is not None:
@@ -51,6 +54,7 @@ if inf_style == 'Image':
                 st.image(images_rectangles)
                 if st.button('clear uploaded_file'):
                     state.widget_key = str(randint(1000, 100000000))
+                    st.write("attempt to clear uploaded_file")
                 state.sync()
                 col1, col2, col3 = st.columns(3)
                 col1.header("Image")
