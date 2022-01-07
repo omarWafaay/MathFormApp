@@ -40,11 +40,12 @@ inf_style = st.sidebar.selectbox("Inference Type",('Image', 'PDF'))
 if inf_style == 'Image':
 
     uploaded_file = st.sidebar.file_uploader("Upload Image", type=['png','jpeg', 'jpg'])
-    if st.sidebar.button('Clear uploaded file or image!'):
-        st.write("attempt to clear uploaded_file")
-        uploaded_file.seek(0)
+
     res = st.sidebar.radio("Final Result",("Detection","Detection And Recogntion"))
     if uploaded_file is not None:
+        if st.sidebar.button('Clear uploaded file or image!'):
+            st.warning("attempt to clear uploaded_file")
+            uploaded_file.seek(0)
         with st.spinner(text='In progress'):
             st.sidebar.image(uploaded_file)
             file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
