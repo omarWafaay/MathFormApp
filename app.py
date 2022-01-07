@@ -34,9 +34,7 @@ download_models()
 math_model = MD.initialize_model("./Models/MathDetector.ts")
 mathargs, *mathobjs = RM.initialize()
 
-if st.button('Clear uploaded file or image!'):
-    st.warning("attempt to clear uploaded_file")
-    uploaded_file.seek(0)
+
 
 inf_style = st.sidebar.selectbox("Inference Type",('Image', 'PDF'))
 if inf_style == 'Image':
