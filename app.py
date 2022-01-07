@@ -34,14 +34,14 @@ download_models()
 math_model = MD.initialize_model("./Models/MathDetector.ts")
 mathargs, *mathobjs = RM.initialize()
 
-
+st.title('Mathematical Formula Detector!')
 
 inf_style = st.sidebar.selectbox("Inference Type",('Image', 'PDF'))
 if inf_style == 'Image':
 
     uploaded_file = st.sidebar.file_uploader("Upload Image", type=['png','jpeg', 'jpg'])
 
-    res = st.sidebar.radio("Final Result",("Detection","Detection And Recogntion"))
+#     res = st.sidebar.radio("Final Result",("Detection","Detection And Recogntion"))
     if uploaded_file is not None:
         if st.sidebar.button('Clear uploaded file or image!'):
             st.warning("attempt to clear uploaded_file")
@@ -50,7 +50,7 @@ if inf_style == 'Image':
             st.sidebar.image(uploaded_file)
             file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
             opencv_image = cv2.imdecode(file_bytes, 1)
-            st.title('Mathematical Formula Detector!')
+            
             if st.button('Launch the Detection!'):
                 results_boxes = MD.predict_formulas(opencv_image,math_model)
                 images_rectangles = cv2.imdecode(file_bytes, 1)
@@ -59,29 +59,29 @@ if inf_style == 'Image':
 
                     
                 
-                col1, col2, col3 = st.columns(3)
-                col1.header("Image")
-                col2.header("Latext")
-                col3.header("Formula")
-                if res == "Detection And Recogntion":
-                    for each_box in results_boxes:
-                        each_box = list(map(int,each_box))
-                        crop_box = opencv_image[each_box[1]:each_box[3],each_box[0]:each_box[2],:]
-                        crop_img = Image.fromarray(np.uint8(crop_box))
-                        pred = RM.call_model(mathargs, *mathobjs, img=crop_img)
-                        col1, col2, col3 = st.columns(3)
-                        with col1:
-                            st.image(crop_box)
-                        with col2:
-                            st.write(pred, width=5)
-                        with col3:
-                            st.markdown("$$"+pred+"$$")
+#                 col1, col2, col3 = st.columns(3)
+#                 col1.header("Image")
+#                 col2.header("Latext")
+#                 col3.header("Formula")
+#                 if res == "Detection And Recogntion":
+#                     for each_box in results_boxes:
+#                         each_box = list(map(int,each_box))
+#                         crop_box = opencv_image[each_box[1]:each_box[3],each_box[0]:each_box[2],:]
+#                         crop_img = Image.fromarray(np.uint8(crop_box))
+#                         pred = RM.call_model(mathargs, *mathobjs, img=crop_img)
+#                         col1, col2, col3 = st.columns(3)
+#                         with col1:
+#                             st.image(crop_box)
+#                         with col2:
+#                             st.write(pred, width=5)
+#                         with col3:
+#                             st.markdown("$$"+pred+"$$")
 elif inf_style == 'PDF':
     imagem_referencia = st.sidebar.file_uploader("Choose an image", type=["pdf"])
     if st.sidebar.button('Clear uploaded file or image!'):
         st.write("attempt to clear uploaded_file")
         imagem_referencia.seek(0)    
-    res = st.sidebar.radio("Final Result",("Detection","Detection And Recogntion"))
+#     res = st.sidebar.radio("Final Result",("Detection","Detection And Recogntion"))
 
     if imagem_referencia is not None:
 
@@ -93,22 +93,22 @@ elif inf_style == 'PDF':
             images_rectangles = np.array(images[int(page_idx)-1])
             draw_rectangles(images_rectangles,results_boxes)
             st.image(images_rectangles)
-            col1, col2, col3 = st.columns(3)
-            col1.header("Image")
-            col2.header("Latext")
-            col3.header("Formula")
-            if res == "Detection And Recogntion":
-                for each_box in results_boxes:
-                    each_box = list(map(int,each_box))
-                    crop_box = opencv_image[each_box[1]:each_box[3],each_box[0]:each_box[2],:]
-                    crop_img = Image.fromarray(np.uint8(crop_box))
-                    pred = RM.call_model(mathargs, *mathobjs, img=crop_img)
-                    col1, col2, col3 = st.columns(3)
-                    with col1:
-                        st.image(crop_box)
-                    with col2:
-                        st.markdown(pred)
-                    with col3:
-                        st.markdown("$$"+pred+"$$")
+#             col1, col2, col3 = st.columns(3)
+#             col1.header("Image")
+#             col2.header("Latext")
+#             col3.header("Formula")
+#             if res == "Detection And Recogntion":
+#                 for each_box in results_boxes:
+#                     each_box = list(map(int,each_box))
+#                     crop_box = opencv_image[each_box[1]:each_box[3],each_box[0]:each_box[2],:]
+#                     crop_img = Image.fromarray(np.uint8(crop_box))
+#                     pred = RM.call_model(mathargs, *mathobjs, img=crop_img)
+#                     col1, col2, col3 = st.columns(3)
+#                     with col1:
+#                         st.image(crop_box)
+#                     with col2:
+#                         st.markdown(pred)
+#                     with col3:
+#                         st.markdown("$$"+pred+"$$")
 
     
