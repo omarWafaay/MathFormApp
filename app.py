@@ -19,12 +19,12 @@ def download_models():
     else:
         print("Detector Model is here")
 
-    if not os.path.exists(mathrecog):
-        detector_url = 'gdown -O '+mathrecog+' https://drive.google.com/uc?id=1oR7eNBOC_3TBhFQ1KTzuWSl7-fet4cYh'
-        with st.spinner('done!\nmodel weights were not found, downloading them...'):
-            os.system(detector_url)
-    else:
-        print("Reconizer Model is here")
+#     if not os.path.exists(mathrecog):
+#         detector_url = 'gdown -O '+mathrecog+' https://drive.google.com/uc?id=1oR7eNBOC_3TBhFQ1KTzuWSl7-fet4cYh'
+#         with st.spinner('done!\nmodel weights were not found, downloading them...'):
+#             os.system(detector_url)
+#     else:
+#         print("Reconizer Model is here")
 
 def draw_rectangles (image, preds):
     for each_pred in preds:
