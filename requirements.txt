@@ -12,7 +12,9 @@ timm==0.4.12
 torch==1.10.1
 torchvision==0.11.2
 transformers==4.2.2
+protobuf==3.20.0
 #wandb==0.12.9
 x_transformers
 opencv-python-headless
 gdown
+altair<5.0.0
